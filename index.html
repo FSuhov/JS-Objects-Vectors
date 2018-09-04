@@ -1,0 +1,103 @@
+<!doctype html>
+
+<html>
+
+<head>
+    <title>Page Title</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="initial-scale=1.0">
+    <style>
+        div {}
+
+        #x_coor,
+        #y_coor {
+            width: 4em;
+        }
+
+        button {
+            width: 150px;
+            background: green;
+            color: white;
+        }
+
+        select {
+            width: 120px;
+        }
+
+        #operations {
+            display: inline-block;
+            width: 350px;
+            position: relative;
+            top: -600px;
+        }
+
+        #btn_plus,
+        #btn_minus {
+            width: 25px;
+        }
+
+        #ops_btns {
+            display: inline-block;
+
+        }
+
+        #field {
+            width: 750px;
+            height: 750px;
+            margin:5px;
+            display: inline-block;
+            border: 1px solid;
+        }
+        #head{
+            background: orange;
+            text-align: center;
+        }
+
+    </style>
+</head>
+
+<body>
+   <div id="head">
+   <h4>ИНСТРУКЦИЯ</h4>
+   <p>Для построения вектора нужно выбрать цвет, ввести название и координаты. Если не введено название или хотя бы одна из координат, то вектор не добаваится. Если вектор с таким названием уже есть, то новый не будет создан.В принципе, есть проверка на максимальные X и Y: исходя из размеров поля 750 на 750, это -374 и 374. То есть, если ввести большее значение, то вектор строится не будет. Но в дальнейшем, при сложении/вычитании в любом случае может простроится вектор, который выйдет за пределы поля.</p>
+   <p>Реализовано два режима работы (меняются чекбоксом). Если не чекнут, то работает режим 1: вектор, полученный в результате сложения/вычитания добавляется, исходные векторы сохраняются. Режим 2: исходные векторы удаляются, остается только результирующий.</p>
+   <p>При опреациях с векторами для результирующего вектора будет использоваться текущий цвет. То есть, для лучшей визуализации перед нажатием на кнопки плюс или минус, рекомендуется сменить цвет.</p>
+   <p>Названия результирующих векторов будет прописано автоматически, включать в себя названия исходных векторов и операцию</p>
+   </div>
+    <div>
+        <form name="new_vector_form">
+            <fieldset>
+                <legend>Данные для построения вектора</legend>
+                <label for="color">ЦВЕТ:</label>
+                <input type="color" id="color">
+                <label for="title">НАИМЕНОВАНИЕ:</label>
+                <input type="text" id="title">
+                <label for="x_coor">КОРДИНАТА X:</label>
+                <input type="number" id="x_coor" min="-374" max=374>
+                <label for="y_coor">КОРДИНАТА Y:</label>
+                <input type="number" id="y_coor" min="-374" max=374>
+                <button id="btn_create" type="button">СОЗДАТЬ</button>
+                <label for="mode">РЕЖИМ РАБОТЫ</label>
+                <input type="checkbox" id="mode" onchange = "modeChange()">
+            </fieldset>
+        </form>
+    </div>
+    <div id="operations">
+        <fieldset>
+            <legend>ОПЕРАЦИИ с ВЕКТОРАМИ</legend>
+            <select name="left_vectors" id="slc_left"></select>
+            <div id="ops_btns">
+                <button id="btn_plus" type="button">+</button>
+                <button id="btn_minus" type="button">-</button>
+            </div>
+            <select name="right_vectors" id="slc_right"></select>
+        </fieldset>
+    </div>
+    <div id="field">
+        <canvas id="canvas" width="750" height="650"></canvas>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
